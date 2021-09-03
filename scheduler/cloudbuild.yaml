@@ -1,0 +1,12 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/sascha-playground-doit/vertex/pipeline/schedule', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/sascha-playground-doit/vertex/pipeline/schedule']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'vertex-ai-pipeline-schedule', '--image', 'gcr.io/sascha-playground-doit/vertex/pipeline/schedule', '--region', 'us-east1', '--platform', 'managed', '--memory', '256Mi', '--no-allow-unauthenticated']
+images:
+- gcr.io/sascha-playground-doit/vertex/pipeline/schedule
