@@ -1,4 +1,4 @@
-##  Vertex AI Pipeline Scheduler
+##  Vertex AI Pipeline Scheduler (interim solution until there is a proper implementation on Google side)
 This is still a DRAFT readme not completed yet. There is a deep dive article soon to be published as well. 
 
 This project contains a Vertex AI Pipeline Scheduler that can work in a CI/CD environment.
