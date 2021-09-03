@@ -6,5 +6,5 @@ gcloud run deploy vertex-ai-pipeline-schedule \
  --region us-east1 \
  --platform managed \
  --memory 256Mi \
- #--no-allow-unauthenticated
+ --no-allow-unauthenticated
 
