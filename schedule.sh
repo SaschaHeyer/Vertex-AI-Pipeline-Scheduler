@@ -1,4 +1,4 @@
-# setup a service account because we don't want to be the cloud run endpoint be public accessible
+# setup a service account because our Cloud Run endpoint is not public accessible
 gcloud iam service-accounts create vertex-ai-pipeline-schedule
 
 

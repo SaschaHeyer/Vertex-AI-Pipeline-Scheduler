@@ -27,4 +27,23 @@ gcloud run deploy vertex-ai-pipeline-schedule \
 
 
 ## Usage
-* After the deployment to Cloud Run we need to setup the Cloud Scheduler to schedule our pipeline run. 
+After the deployment to Cloud Run we need to setup the Cloud Scheduler to schedule our pipeline run. 
+
+Because our Cloud Run endpoint is not public accessible we need to set up a service account. Granting the rights to invoke Cloud Run by assigning the role `run.invoker`
+```
+gcloud iam service-accounts create vertex-ai-pipeline-schedule
+
+
+gcloud projects add-iam-policy-binding sascha-playground-doit \
+    --member "serviceAccount:vertex-ai-pipeline-schedule@sascha-playground-doit.iam.gserviceaccount.com" \
+    --role "roles/run.invoker"
+```
+
+And finally we create our Cloud Scheduler job.
+```
+ gcloud scheduler jobs create http \
+    JOB_NAME \
+    --schedule SCHEDULE \
+    --uri CLOUD_RUN_URL \
+    --oidc-service-account-email vertex-ai-pipeline-schedule@sascha-playground-doit.iam.gserviceaccount.com`
+```
